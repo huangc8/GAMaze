@@ -90,7 +90,7 @@ public class Main {
 		Integer r;
 		Integer c;
 		Point parent;
-
+		
 		public Point(int x, int y, Point p) {
 			r = x;
 			c = y;
