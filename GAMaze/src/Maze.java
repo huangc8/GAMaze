@@ -12,7 +12,6 @@ public class Maze {
 		this.genes = genes;
 		
 		Generate();
-		Print();
 	}
 	
 	public void Generate() {
@@ -98,6 +97,11 @@ public class Maze {
 				System.out.print(maz[i][j] + " ");
 			System.out.println();
 		}
+	}
+	
+	public float getFitness() {
+		Solver solve = new Solver();
+		return solve.startSolve(maz);
 	}
 	
 	static class Point {

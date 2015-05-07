@@ -3,14 +3,14 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
-		int num_genes = 300;
-		
-		ArrayList<Double> genes = new ArrayList<Double>();
-		for (int i = 0; i < num_genes; i++) {
-			genes.add(Math.random());
+		Population myPop = new Population(50, true);
+
+		for (int i = 0; i < 1000; i++) {
+			myPop.getFittest().Print();
+			System.out.println("Generation: " + i + " Fittest: " + myPop.getFittest().getFitness());
+			myPop = Algorithm.evolvePopulation(myPop);
 		}
-		
-		Maze maze = new Maze(genes);
+
 	}
 
 }
