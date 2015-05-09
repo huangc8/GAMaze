@@ -4,7 +4,7 @@ public class Solver {
 	boolean[][] visited;
 	char[][] solution;
 	boolean done;
-	long time;
+	int iter;
 	int rowSize = 0, colSize = 0, row = 0, col = 0;
 
 	// constructor
@@ -22,12 +22,11 @@ public class Solver {
 		visited = new boolean[rowSize][colSize];
 
 		findStart();
-		final long startTime = System.nanoTime();
 		solve(row, col);
-		final long endTime = System.nanoTime();
-		time = endTime - startTime;
+		
 		// printSolution();
-		return time;
+		System.out.println(iter);
+		return iter;
 	}
 
 	// reset
@@ -36,7 +35,7 @@ public class Solver {
 		visited = null;
 		solution = null;
 		done = false;
-		time = 0;
+		iter = 0;
 		rowSize = 0;
 		colSize = 0;
 	}
@@ -76,6 +75,8 @@ public class Solver {
 	// recursion solve
 	private void solve(int x, int y) {
 
+		iter++;
+		
 		// end conditions
 		if (done || visited[x][y]) {
 			return;
