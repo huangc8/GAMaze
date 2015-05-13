@@ -3,7 +3,7 @@ import java.util.Iterator;
 
 
 public class Maze {
-	public static final int r = 20, c = 20;
+	public static final int r = 100, c = 100;
 	
 	public ArrayList<Double> genes;
 	public char[][] maz = new char[r][c];

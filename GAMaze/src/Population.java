@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Population {
     Maze[] individuals;
     
-    int numGenes = 300;
+    int numGenes = 8000;
 
     /*
      * Constructors

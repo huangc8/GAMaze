@@ -6,6 +6,7 @@ public class Solver {
 	boolean done;
 	int iter;
 	int rowSize = 0, colSize = 0, row = 0, col = 0;
+	int branches = 0;
 
 	// constructor
 	public Solver() {
@@ -23,10 +24,10 @@ public class Solver {
 
 		findStart();
 		solve(row, col);
-		
+		computeFitness();
+		branches -= 2; // remove S and E
 		// printSolution();
-		System.out.println(iter);
-		return iter;
+		return branches;
 	}
 
 	// reset
@@ -38,8 +39,9 @@ public class Solver {
 		iter = 0;
 		rowSize = 0;
 		colSize = 0;
+		branches = 0;
 	}
-	
+
 	// print the solution
 	private void printSolution() {
 		for (int r = 0; r < rowSize; r++) {
@@ -65,18 +67,42 @@ public class Solver {
 	// check if valid move
 	private boolean moveCheck(int x, int y) {
 		if (x >= 0 && x < rowSize && y >= 0 && y < colSize) {
-			if (maze[x][y] != '*') {
+			if (maze[x][y] != '*' && maze[x][y] != 'X') {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	private void computeFitness() {
+		for (int r = 0; r < rowSize; r++) {
+			for (int c = 0; c < colSize; c++) {
+				if (solution[r][c] == 'X') {
+					// check all direction
+					// up
+					if (moveCheck(r, c + 1)) {
+						branches++;
+					}
+					// right
+					if (moveCheck(r + 1, c)) {
+						branches++;
+					}
+					// down
+					if (moveCheck(r, c - 1)) {
+						branches++;
+					}
+					// left
+					if (moveCheck(r - 1, c)) {
+						branches++;
+					}
+				}
+			}
+		}
+	}
+
 	// recursion solve
 	private void solve(int x, int y) {
 
-		iter++;
-		
 		// end conditions
 		if (done || visited[x][y]) {
 			return;
